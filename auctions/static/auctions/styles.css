@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Oswald:wght@300;400;500&display=swap');
+
+
+body {
+    background-color: #D8D7D5;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.navbar-custom{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #050606;
+    background-color: #ADB3BC;
+    margin: 0;
+    padding: 10px;
+    box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.75);
+    font-size: 16px;
+}
+
+#id_isActive{
+    height: 30px;
+    width: 30px;
+    margin-bottom: 1%;
+}
+
+#display{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+#display > .card{
+    width: 100%;
+    background-color: #FDFDFD;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 1px 3px 6px 0px rgba(0,0,0,0.75);
+}
+
+h2{
+    font-family: 'Oswald', sans-serif;
+}
+
+.oswald{
+    font-family: 'Oswald', sans-serif;
+}
+
+.open{
+    font-family: 'Open Sans', sans-serif;
+}

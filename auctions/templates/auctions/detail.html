@@ -1,0 +1,102 @@
+{% extends "auctions/layout.html" %} {% block body %}
+  <main class="p-3 bg-white">
+    <h2><span class="text-muted">Listing:</span> {{ listing.title }}</h2>
+    <div class="row">
+      {% if user.is_authenticated %}
+        {% if isListingInWatchlist %}
+          <form action="{% url 'removeWatchlist' id=listing.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove from Watchlist</button>
+          </form>
+        {% else %}
+          <form action="{% url 'addWatchlist' id=listing.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Add to Watchlist</button>
+          </form>
+        {% endif %}
+      {% endif %}
+    </div>
+    <img
+    src="{{ listing.image }}"
+    class="img-fluid rounded-start p-1"
+    alt="..."
+    style="
+    max-width: 300px;
+    min-width: 250px;
+    max-height: 300px;
+    min-height: 250px;
+    "
+    >
+    <p class="border-bottom border-info open">{{ listing.detail }}</p>
+    <h4 class="oswald">${{ listing.price }}</h4>
+    <p class="small text-muted open" style="font-style: italic;">
+      {{ allbids }} bid(s) so far. Your bid is the current bid.
+    </p>
+    <form action="{% url 'placebid' listing_id=listing.id %}" method="post">
+      {% csrf_token %}
+      <div class="input-group mb-3">
+        <input
+        type="number"
+        class="form-control"
+        placeholder="Place New Bid"
+        name="newbid"
+        />
+        <button class="btn btn-primary" type="submit" id="button-addon2">
+        Bid
+        </button>
+      </div>
+    </form>
+    {% if allbids != 0 %}
+      <h5 class="oswald">Last 5 bids:</h5>
+      <ul>
+        {% for bid in whobid %}
+          <li>
+            <h6><strong class="oswald" style="font-weight: 500">${{ bid.new_bid }} </strong>by {{ bid.bidder }}</h6>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <h5>No bids on this listing yet.</h5>
+    {% endif %}
+    <p>{{ message }}</p>
+    <h5 class="oswald">Details:</h5>
+    <ul>
+      <li><p>Listed by: {{ listing.owner }}</p></li>
+      <li>
+        <p>
+          Category:&nbsp;<span class="badge bg-secondary"
+          >{{ listing.category }}</span
+          >
+        </p>
+      </li>
+    </ul>
+    <div class="bg-secondary p-4 bg-opacity-10">
+      <h5 class="oswald">Leave a comment:</h5>
+      <form action="{% url 'comment' listing_id=listing.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="comment"></textarea>
+          <label for="floatingTextarea"><span class="text-muted">Leave a comment</span></label>
+          <button class="btn btn-primary mt-1 mb-1" type="submit">Post</button>
+        </div>
+      </form>
+      <h6 class="oswald">All Comments</h6>
+      {% for singlecomment in comments %}
+        <div class="card mb-3" style="max-width: 840px;">
+          <div class="row g-0">
+            <div class="col-md-2 text-center">
+              <img src="http://getdrawings.com/free-icon-bw/generic-avatar-icon-3.png" class="img-fluid rounded-start mt-3" alt="..." style="max-width: 100px; max-height: 100px;">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                <h5 class="card-title">{{ singlecomment.commenter }}</h5>
+                <p class="card-text">{{ singlecomment.comment }}</p>
+                <p class="card-text"><small class="text-muted" style="font-style: italic">{{ singlecomment.created_at }}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}

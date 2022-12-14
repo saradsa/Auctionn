@@ -1,0 +1,17 @@
+{% extends "auctions/layout.html" %} {% block body %}
+  <main class="p-3">
+    <h2>All Categories</h2>
+    <ul class="list-group list-group-flush">
+      {% for category,item in allitems %}
+        <li class="list-group-item ul-custom">
+          <a
+            href="{% url 'category_listing' category_id=category.id %}"
+            style="text-decoration: none; color: #050606;"
+            class="link-custom"
+          >{{ category }}&nbsp;</a
+          ><span class="badge bg-secondary">{{ item }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
+{% endblock %}
