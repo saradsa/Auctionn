@@ -6,7 +6,12 @@ This is my solution to the Project 2 of [CS50's Web Programming with Python and 
 
 ### Screenshot
 
-![Screenshot of my project](./Screenshot.png)
+![Screenshot of my project](./snaps/Full.png)
+![Screenshot of my project](./snaps/create.png)
+![Screenshot of my project](./snaps/detail.png)
+![Screenshot of my project](./snaps/watchlist.png)
+![Screenshot of my project](./snaps/categories.png)
+
 
 ### Links
 
